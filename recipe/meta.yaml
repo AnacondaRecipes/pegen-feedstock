@@ -19,11 +19,11 @@ requirements:
     - pip
     - python
     - setuptools
+    - toml
+    - setuptools_scm
     - wheel
   run:
     - python
-    - toml
-    - setuptools_scm
 
 test:
   requires:
