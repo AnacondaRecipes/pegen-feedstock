@@ -1,0 +1,54 @@
+{% set name = "pegen" %}
+{% set version = "0.2.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: 0cd306d5b1073542c177035c3caa4526cd10f674a74d6ab40d9a94c57fe1ff33
+
+build:
+  skip: true  # [py<38]
+  number: 0
+  script: "{{ PYTHON }} -m pip install --no-deps . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+    - setuptools
+    - toml
+    - setuptools_scm
+    - wheel
+  run:
+    - python
+
+test:
+  requires:
+    - pip
+    - pytest
+    - pytest-cov
+  commands:
+    - pip check
+  imports:
+    - pegen
+
+about:
+  home: https://we-like-parsers.github.io/pegen/
+  description : |
+    Pegen is the parser generator used in CPython 
+    to produce the parser used by the interpreter. 
+    It allows to produce PEG parsers 
+    from a description of a formal Grammar.
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: "CPython's PEG parser generator"
+  doc_url: https://we-like-parsers.github.io/pegen/
+  dev_url: https://github.com/we-like-parsers/pegen
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here
