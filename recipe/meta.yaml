@@ -26,14 +26,26 @@ requirements:
     - python
 
 test:
+  source_files:
+    - tests
   requires:
     - pip
     - pytest
     - pytest-cov
   commands:
     - pip check
+    - pytest tests/test_pegen.py
+    - pegen --help
   imports:
     - pegen
+    - pegen.grammar
+    - pegen.grammar_parser
+    - pegen.grammar_visualizer
+    - pegen.parser
+    - pegen.parser_generator
+    - pegen.python_generator
+    - pegen.tokenizer
+    - pegen.utils
 
 about:
   home: https://we-like-parsers.github.io/pegen/
