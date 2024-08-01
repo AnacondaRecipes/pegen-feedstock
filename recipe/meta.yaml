@@ -47,7 +47,7 @@ test:
     - pegen.utils
 
 about:
-  home: https://we-like-parsers.github.io/pegen/
+  home: https://github.com/we-like-parsers/pegen
   description : |
     Pegen is the parser generator used in CPython to produce the parser used by the interpreter. It allows to produce PEG parsers from a description of a formal Grammar.
   license: MIT
