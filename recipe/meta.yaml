@@ -34,8 +34,7 @@ test:
     - pytest-cov
   commands:
     - pip check
-    - pytest tests/test_pegen.py
-    - pegen --help
+    - pytest tests/test_pegen.py -vv
   imports:
     - pegen
     - pegen.grammar
