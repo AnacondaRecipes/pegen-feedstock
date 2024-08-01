@@ -1,18 +1,18 @@
 {% set name = "pegen" %}
-{% set version = "0.2.0" %}
+{% set version = "0.3.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 0cd306d5b1073542c177035c3caa4526cd10f674a74d6ab40d9a94c57fe1ff33
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 8cb30cee508a95c573aa256ed2cfa80ef8f561b90264c70e7de5afc50b4ac87d
 
 build:
   skip: true  # [py<38]
   number: 0
-  script: "{{ PYTHON }} -m pip install --no-deps . -vv"
+  script: {{ PYTHON }} -m pip install --no-deps . -vv --no-build-isolation
 
 requirements:
   host:
@@ -26,29 +26,37 @@ requirements:
     - python
 
 test:
+  source_files:
+    - tests
   requires:
     - pip
     - pytest
     - pytest-cov
   commands:
     - pip check
+    - pytest tests/test_pegen.py -vv
   imports:
     - pegen
+    - pegen.grammar
+    - pegen.grammar_parser
+    - pegen.grammar_visualizer
+    - pegen.parser
+    - pegen.parser_generator
+    - pegen.python_generator
+    - pegen.tokenizer
+    - pegen.utils
 
 about:
-  home: https://we-like-parsers.github.io/pegen/
+  home: https://github.com/we-like-parsers/pegen
   description : |
-    Pegen is the parser generator used in CPython 
-    to produce the parser used by the interpreter. 
-    It allows to produce PEG parsers 
-    from a description of a formal Grammar.
+    Pegen is the parser generator used in CPython to produce the parser used by the interpreter. It allows to produce PEG parsers from a description of a formal Grammar.
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: "CPython's PEG parser generator"
+  summary: CPython's PEG parser generator
   doc_url: https://we-like-parsers.github.io/pegen/
   dev_url: https://github.com/we-like-parsers/pegen
 
 extra:
   recipe-maintainers:
-    - your-github-id-here
+    - MatthieuDartiailh
